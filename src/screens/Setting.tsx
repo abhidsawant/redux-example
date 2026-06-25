@@ -1,15 +1,33 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, TextInput, Button } from 'react-native'
+import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { updateRole } from '../store/actions/settingActions'
 
 const Setting = () => {
-  const totalLikes = useSelector(state => state.totalLikes);
+  const [userRole, setuserRole] = useState("")
+  const dispatch = useDispatch();
+  const totalLikes = useSelector(state => state.dataReducer.totalLikes);
+  const role = useSelector(state => state.setting.userRole);
 
   return (
     <SafeAreaView style={styles.constainer}>
-      <Text>Setting</Text>
+      <Text>Settings</Text>
+      <Text>User Role: {role}</Text>
       <Text>Total Likes: {totalLikes}</Text>
+      <TextInput 
+        style={{borderWidth: 1, width: 200}}
+        placeholder='Enter New Role'
+        value={userRole}
+        onChangeText={setuserRole}
+      />
+      <Button 
+        title="Change Role" 
+        onPress={() => {
+          if(userRole.trim() === "") return;
+          dispatch(updateRole(userRole));
+          setuserRole("");
+        }}/>
     </SafeAreaView>
   )
 }

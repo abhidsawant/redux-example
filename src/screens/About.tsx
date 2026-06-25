@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 
 
 const About = () => {
-  const totalLikes = useSelector(state => state.totalLikes);
+  const totalLikes = useSelector(state => state.dataReducer.totalLikes);
 
   return (
     <SafeAreaView style={styles.constainer}>

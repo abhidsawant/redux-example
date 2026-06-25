@@ -3,10 +3,11 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useSelector, useDispatch } from 'react-redux'
 import { decreaseTotalLikes, increaseTotalLikes } from '../store/actions/dataActions'
+import { RootState } from '../store/store'
 
 const Home = () => {
   const dispatch = useDispatch();
-  const totalLikes = useSelector(state => state.totalLikes);
+  const totalLikes = useSelector((state: RootState) => state.dataReducer.totalLikes);
 
   return (
     <SafeAreaView style={styles.constainer}>
